@@ -45,7 +45,7 @@ const AddContact = (props) => {
                 },
               ]}
             >
-              <Input placeholder="enter mobile"></Input>
+              <Input placeholder="enter mobile with country code"></Input>
             </Form.Item>
           </Col>
 

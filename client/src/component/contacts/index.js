@@ -3,10 +3,10 @@ import { Table, Button, PageHeader, Modal } from "antd";
 import AddContact from "./addContact";
 import moment from "moment";
 import { connect } from "react-redux";
-import { getContact } from "../../actions";
+import { getContact, logout } from "../../actions";
 
 const Contacts = (props) => {
-  const { contacts, getContact } = props;
+  const { contacts, getContact, logout } = props;
   const [openAddContact, setOpenAddContact] = useState(false);
   const columns = [
     {
@@ -54,7 +54,17 @@ const Contacts = (props) => {
       </Modal>
       <PageHeader
         title="Contacts"
-        extra={[<Button type="primary"> Logout</Button>]}
+        extra={[
+          <Button
+            type="primary"
+            onClick={() => {
+              logout();
+            }}
+          >
+            {" "}
+            Logout
+          </Button>,
+        ]}
       ></PageHeader>
       <Table columns={columns} dataSource={contacts}></Table>
       <Button
@@ -75,4 +85,4 @@ const Contacts = (props) => {
 function mapStateToProps({ contacts }) {
   return { contacts };
 }
-export default connect(mapStateToProps, { getContact })(Contacts);
+export default connect(mapStateToProps, { getContact, logout })(Contacts);

@@ -2,7 +2,6 @@ import { notification } from "antd";
 import axios from "axios";
 import {
   USER_AUTH_LOGIN,
-  USER_FILE_LIST,
   USER_AUTH_LOGOUT,
   USER_CONTACT_ADD,
   USER_CONTACT_LIST,
