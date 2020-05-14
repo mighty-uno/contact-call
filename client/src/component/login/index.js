@@ -29,7 +29,7 @@ const Login = (props) => {
   }
   return (
     <div className="loginContainer">
-      <Card title="Login">
+      <Card title="Login" className="formContainer">
         <Form
           layout={"vertical"}
           onFinish={onFinish}
