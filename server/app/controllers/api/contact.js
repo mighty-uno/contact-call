@@ -1,5 +1,6 @@
 "user strict";
 const { Contacts } = require("../../models");
+const { validateMobileNumber } = require("../../services/birdApi");
 
 class Contact {
   async getAll(req, res) {
@@ -9,7 +10,7 @@ class Contact {
         .lean();
       res.send(result);
     } catch (e) {
-      res.send(e);
+      res.send({ error: e.message });
     }
   }
 
@@ -29,7 +30,7 @@ class Contact {
       await contact.save();
       res.send(contact.toJSON());
     } catch (e) {
-      res.send(e);
+      res.send({ error: e.message });
     }
   }
 
@@ -37,7 +38,16 @@ class Contact {
     try {
       const contact = await res.send(contact.toJSON());
     } catch (e) {
-      res.send(e);
+      res.send({ error: e.message });
+    }
+  }
+
+  async validate(req, res) {
+    try {
+      const result = await validateMobileNumber(req.params.mobile);
+      res.send(result);
+    } catch (e) {
+      res.status(500).send({ error: e.message });
     }
   }
 }

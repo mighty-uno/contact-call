@@ -3,19 +3,23 @@ import { connect } from "react-redux";
 import { Form, Row, Col, Input, Button } from "antd";
 import { addContact } from "../../actions";
 const AddContact = (props) => {
+  const [form] = Form.useForm();
   const { addContact, resolve } = props;
   const [addingLoader, setAddingLoader] = useState(false);
+
   const onFinish = async (values) => {
     setAddingLoader(true);
     const result = await addContact(values);
     if (result) {
+      form.resetFields();
       resolve();
     }
     setAddingLoader(false);
   };
+
   return (
     <>
-      <Form onFinish={onFinish}>
+      <Form form={form} onFinish={onFinish}>
         <Row gutter={12}>
           <Col span={24}>
             <Form.Item

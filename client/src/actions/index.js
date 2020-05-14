@@ -118,6 +118,14 @@ export const getContact = (req = {}) => async (dispatch) => {
 export const addContact = (req) => async (dispatch) => {
   const notification_context = "Add Contact";
   try {
+    const validate = await validateMobileNumber(req.mobile);
+    if (!validate) {
+      notification.error({
+        message: notification_context,
+        description: validate.data.error,
+      });
+      return;
+    }
     const payload = await axios.post("api/contact", req);
 
     if (payload.data.error) {
@@ -134,6 +142,35 @@ export const addContact = (req) => async (dispatch) => {
       notification.success({
         message: notification_context,
         description: "Contact Added",
+      });
+
+      return true;
+    }
+  } catch (e) {
+    notification.error({
+      message: notification_context,
+      description: e,
+    });
+
+    return false;
+  }
+};
+
+export const validateMobileNumber = async (mobile) => {
+  const notification_context = "Contact";
+  try {
+    const payload = await axios.get(`api/contact/validate/${mobile}`);
+
+    if (payload.data.error) {
+      notification.error({
+        message: notification_context,
+        description: payload.data.error,
+      });
+      return false;
+    } else if (payload.data) {
+      notification.success({
+        message: notification_context,
+        description: "Valid",
       });
 
       return true;
