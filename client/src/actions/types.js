@@ -1,0 +1,5 @@
+export const USER_AUTH_LOGIN = "FETCH_USER";
+export const USER_AUTH_SIGNUP = "ADD_USER";
+export const USER_AUTH_LOGOUT = "USER_AUTH_LOGOUT";
+export const USER_CONTACT_LIST = "USER_CONTACT_LIST";
+export const USER_CONTACT_ADD = "USER_CONTACT_ADD";
