@@ -47,7 +47,7 @@ class Contact {
       const result = await validateMobileNumber(req.params.mobile);
       res.send(result);
     } catch (e) {
-      res.status(500).send({ error: e.message });
+      res.status(400).send({ error: e.message });
     }
   }
 }

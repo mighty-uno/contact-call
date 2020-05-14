@@ -6,7 +6,6 @@ import {
   USER_CONTACT_ADD,
   USER_CONTACT_LIST,
 } from "./types";
-import { message } from "antd";
 
 export const login = (req) => async (dispatch) => {
   try {
